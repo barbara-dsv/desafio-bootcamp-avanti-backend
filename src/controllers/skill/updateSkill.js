@@ -2,12 +2,19 @@ import prisma from "../../PrismaCliente.js";
 
 const updateSkill = async (req, res) => {
     const { id } = req.params;
+    const loggedPersonId = req.loggedPersonId;
     const { titulo, descricao, categoria, nivel } = req.body;
     try {
         const skill = await prisma.conhecimento.findUnique({ where: { id: Number(id) } });
 
         if (!skill) {
             return res.status(404).json("Conhecimento não encontrado.");
+        };
+
+        if (skill.pessoa_id !== loggedPersonId) {
+            return res.status(403).json({
+                mensagem: "Você não tem permissão para editar uma oferta que não é sua."
+            });
         };
 
         const updateSkill = await prisma.conhecimento.update({
