@@ -6,7 +6,7 @@ const deleteSkill = async (req, res) => {
         const skill = await prisma.conhecimento.findUnique({ where: { id: Number(id) } });
 
         if (!skill) {
-            return response.status(404).json("Conhecimento não encontrado.");
+            return res.status(404).json("Conhecimento não encontrado.");
         };
 
         await prisma.conhecimento.delete({ where: { id: Number(id) } });
