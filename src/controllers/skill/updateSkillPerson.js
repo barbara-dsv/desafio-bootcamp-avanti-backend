@@ -10,6 +10,14 @@ const updateSkillPerson = async (req, res) => {
             return res.status(404).json("Conhecimento não encontrado.");
         };
 
+        const person = await prisma.pessoa.findUnique({
+            where: { id: Number(pessoa_id) }
+        });
+
+        if (!person) {
+            return res.status(404).json("Pessoa não encontrada.")
+        };
+
         const updateSkillPerson = await prisma.conhecimento.update({
             data: { pessoa_id: Number(pessoa_id) },
             where: { id: Number(id) }
