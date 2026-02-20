@@ -2,20 +2,19 @@ import prisma from "../../PrismaCliente.js";
 
 const createSkill = async (req, res) => {
 
-    const { pessoa_id } = req.params;
+    const loggedPersonId = req.loggedPersonId;
     const { titulo, descricao, categoria, nivel } = req.body;
+    const niveisPermitidos = ['Iniciante', 'Intermediario', 'Avancado'];
+
     try {
-
-        const person = await prisma.pessoa.findUnique({
-            where: { id: Number(pessoa_id) }
-        });
-
-        if (!person) {
-            return res.status(404).json("Pessoa não encontrada.")
-        };
+        if (!niveisPermitidos.includes(nivel)) {
+            return res.status(400).json({
+                mensagem: "Nível inválido. Você deve escolher entre: Iniciante, Intermediario ou Avancado."
+            });
+        }
 
         const skill = await prisma.conhecimento.create({
-            data: { titulo, descricao, categoria, nivel, pessoa_id: Number(pessoa_id) }
+            data: { titulo, descricao, categoria, nivel, pessoa_id: loggedPersonId }
         });
 
         return res.status(201).json(skill);
