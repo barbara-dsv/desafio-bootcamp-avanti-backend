@@ -11,6 +11,7 @@ import filterSkillCategoryOrLeve from "./controllers/skill/filterSkillCategoryOr
 import createPerson from "./controllers/person/createPerson.js";
 import login from "./controllers/person/login.js";
 import listPerson from "./controllers/person/listPerson.js";
+import filterSkillTitleOrDescription from "./controllers/skill/filterSkillTitleOrDescription.js";
 
 
 const routes = express();
@@ -26,5 +27,6 @@ routes.put("/skill/:id/person/:pessoa_id", updateSkillPerson);
 routes.get("/skill", listSkill);
 routes.get("/skill/details/:id", detailsSkill);
 routes.get("/filterSkillCategoryOrLevel", filterSkillCategoryOrLeve);
+routes.get("/filterSkillTitleOrDescription", filterSkillTitleOrDescription);
 
 export default routes;
