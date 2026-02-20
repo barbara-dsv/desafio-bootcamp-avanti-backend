@@ -2,17 +2,22 @@ import prisma from "../../PrismaCliente.js";
 
 const filterSkillCategoryOrLeve = async (req, res) => {
     const { categoria, nivel } = req.query;
+    const niveisPermitidos = ['Iniciante', 'Intermediario', 'Avancado'];
     try {
+
+        if (nivel && !niveisPermitidos.includes(nivel)) {
+            return res.status(400).json({
+                mensagem: "Nível inválido. Você deve procurar por: Iniciante, Intermediario ou Avancado."
+            });
+        };
+
         const skills = await prisma.conhecimento.findMany({
             where: {
                 categoria: categoria ? {
                     contains: categoria,
                     mode: 'insensitive'
                 } : undefined,
-                nivel: nivel ? {
-                    contains: nivel,
-                    mode: 'insensitive'
-                } : undefined
+                nivel: nivel ?? undefined
             }
         });
 
