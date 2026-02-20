@@ -10,12 +10,14 @@ import detailsSkill from "./controllers/skill/detailsSkill.js";
 import filterSkillCategoryOrLeve from "./controllers/skill/filterSkillCategoryOrLevel.js";
 import createPerson from "./controllers/person/createPerson.js";
 import login from "./controllers/person/login.js";
+import listPerson from "./controllers/person/listPerson.js";
 
 
 const routes = express();
 
 routes.post("/person", createPerson);
 routes.post("/login", login);
+routes.get("/person", auth, listPerson)
 
 routes.post("/skill", auth, createSkill);
 routes.put("/skill/:id", auth, updateSkill);
