@@ -9,11 +9,13 @@ import listSkill from "./controllers/skill/listSkill.js";
 import detailsSkill from "./controllers/skill/detailsSkill.js";
 import filterSkillCategoryOrLeve from "./controllers/skill/filterSkillCategoryOrLevel.js";
 import createPerson from "./controllers/person/createPerson.js";
+import login from "./controllers/person/login.js";
 
 
 const routes = express();
 
 routes.post("/person", createPerson);
+routes.post("/login", login);
 
 routes.post("/skill/:pessoa_id", createSkill);
 routes.put("/skill/:id", auth, updateSkill);
