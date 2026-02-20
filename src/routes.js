@@ -17,7 +17,7 @@ const routes = express();
 routes.post("/person", createPerson);
 routes.post("/login", login);
 
-routes.post("/skill/:pessoa_id", createSkill);
+routes.post("/skill", auth, createSkill);
 routes.put("/skill/:id", auth, updateSkill);
 routes.delete("/skill/:id", auth, deleteSkill);
 routes.put("/skill/:id/person/:pessoa_id", updateSkillPerson);
