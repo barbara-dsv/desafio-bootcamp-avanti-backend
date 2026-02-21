@@ -1,4 +1,4 @@
-import prisma from "../../PrismaCliente.js";
+import prisma from '../../database/PrismaCliente.js';
 
 const filterSkillCategoryOrLeve = async (req, res) => {
     const { categoria, nivel } = req.query;

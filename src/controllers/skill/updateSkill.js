@@ -1,4 +1,4 @@
-import prisma from "../../PrismaCliente.js";
+import prisma from '../../database/PrismaCliente.js';
 
 const updateSkill = async (req, res) => {
     const { id } = req.params;

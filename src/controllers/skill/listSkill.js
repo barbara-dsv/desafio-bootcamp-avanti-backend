@@ -1,4 +1,4 @@
-import prisma from "../../PrismaCliente.js";
+import prisma from '../../database/PrismaCliente.js';
 
 const listSkill = async (req, res) => {
     const { page = 1, limit = 5 } = req.query;

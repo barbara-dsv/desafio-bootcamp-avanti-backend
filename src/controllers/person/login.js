@@ -1,4 +1,4 @@
-import prisma from '../../PrismaCliente.js';
+import prisma from '../../database/PrismaCliente.js';
 import jwt from 'jsonwebtoken';
 
 const login = async (req, res) => {
