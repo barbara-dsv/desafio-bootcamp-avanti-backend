@@ -12,6 +12,8 @@ import createPerson from "./controllers/person/createPerson.js";
 import login from "./controllers/person/login.js";
 import listPerson from "./controllers/person/listPerson.js";
 import filterSkillTitleOrDescription from "./controllers/skill/filterSkillTitleOrDescription.js";
+import deletePerson from "./controllers/person/deletePerson.js";
+import editPerson from "./controllers/person/editPerson.js";
 
 
 const routes = express();
@@ -19,6 +21,8 @@ const routes = express();
 routes.post("/person", createPerson);
 routes.post("/login", login);
 routes.get("/person", auth, listPerson)
+routes.delete("/person/:id", auth, deletePerson);
+routes.put("/person/:id", auth, editPerson);
 
 routes.post("/skill", auth, createSkill);
 routes.put("/skill/:id", auth, updateSkill);
