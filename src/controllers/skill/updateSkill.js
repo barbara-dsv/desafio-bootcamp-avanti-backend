@@ -4,6 +4,7 @@ const updateSkill = async (req, res) => {
     const { id } = req.params;
     const loggedPersonId = req.loggedPersonId;
     const { titulo, descricao, categoria, nivel } = req.body;
+    const niveisPermitidos = ['Iniciante', 'Intermediario', 'Avancado'];
     try {
         const skill = await prisma.conhecimento.findUnique({ where: { id: Number(id) } });
 
@@ -16,7 +17,11 @@ const updateSkill = async (req, res) => {
                 mensagem: "Você não tem permissão para editar uma oferta que não é sua."
             });
         };
-
+        if (nivel && !niveisPermitidos.includes(nivel)) {
+            return res.status(400).json({
+                mensagem: "Nível inválido. Você deve cadastrar por: Iniciante, Intermediario ou Avancado."
+            });
+        };
         const updateSkill = await prisma.conhecimento.update({
             data: { titulo, descricao, categoria, nivel },
             where: { id: Number(id) }
