@@ -142,9 +142,9 @@ Authorization: Bearer SEU_TOKEN
 ```
 src/
  ├── controllers/
+ ├── database/
  ├── middlewares/
  ├── routes.js
- ├── PrismaCliente.js
  └── index.js
 ```
 
