@@ -1,8 +1,9 @@
-import prisma from '../../PrismaCliente.js';
+import prisma from '../../database/PrismaCliente.js';
+import bcrypt from 'bcrypt';
 
 const createPerson = async (req, res) => {
 
-    const { nome, email, telefone, descricao } = req.body;
+    const { nome, email, telefone, descricao, senha } = req.body;
     try {
 
         const emailExists = await prisma.pessoa.findUnique({
@@ -13,9 +14,12 @@ const createPerson = async (req, res) => {
             return res.status(400).json({ mensagem: 'Email já cadastrado.' });
         };
 
+        const encryptedPassword = await bcrypt.hash(senha, 10);
+
         const person = await prisma.pessoa.create({
-            data: { nome, email, telefone, descricao }
-        })
+            data: { nome, email, telefone, descricao, senha: encryptedPassword }
+        });
+
         return res.status(201).json(person);
     } catch (error) {
         console.log(error);

@@ -23,7 +23,7 @@ routes.get("/person", auth, listPerson)
 routes.post("/skill", auth, createSkill);
 routes.put("/skill/:id", auth, updateSkill);
 routes.delete("/skill/:id", auth, deleteSkill);
-routes.put("/skill/:id/person/:pessoa_id", updateSkillPerson);
+routes.patch("/skill/:id/person/:pessoa_id", updateSkillPerson);
 routes.get("/skill", listSkill);
 routes.get("/skill/details/:id", detailsSkill);
 routes.get("/filterSkillCategoryOrLevel", filterSkillCategoryOrLeve);

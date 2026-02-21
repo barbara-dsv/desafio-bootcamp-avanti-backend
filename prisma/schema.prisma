@@ -13,6 +13,7 @@ model Pessoa {
   email         String         @unique
   telefone      String
   descricao     String?
+  senha         String
   conhecimentos Conhecimento[]
 }
 
