@@ -1,5 +1,6 @@
 generator client {
   provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
 }
 
 datasource db {
@@ -12,15 +13,22 @@ model Pessoa {
   email         String         @unique
   telefone      String
   descricao     String?
+  senha         String
   conhecimentos Conhecimento[]
 }
 
+enum nivelConhecimento {
+  Iniciante
+  Intermediario
+  Avancado
+}
+
 model Conhecimento {
-  id        Int    @id @default(autoincrement())
+  id        Int               @id @default(autoincrement())
   titulo    String
   descricao String
   categoria String
-  nivel     String
+  nivel     nivelConhecimento
   pessoa_id Int
-  pessoa    Pessoa @relation(fields: [pessoa_id], references: [id])
+  pessoa    Pessoa            @relation(fields: [pessoa_id], references: [id])
 }
