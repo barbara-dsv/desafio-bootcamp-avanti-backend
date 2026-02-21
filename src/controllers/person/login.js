@@ -1,9 +1,10 @@
 import prisma from '../../database/PrismaCliente.js';
 import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
 
 const login = async (req, res) => {
 
-    const { email, telefone } = req.body;
+    const { email, senha } = req.body;
     try {
         const person = await prisma.pessoa.findUnique({
             where: { email }
@@ -13,7 +14,8 @@ const login = async (req, res) => {
             return res.status(400).json({ mensagem: 'Email não cadastrado.' });
         };
 
-        if (person.telefone !== telefone) return res.status(400).json({ mensagem: "Email ou telefone incorretos." })
+        const passwordCorrect = await bcrypt.compare(senha, person.senha);
+        if (!passwordCorrect) return res.status(400).json({ mensagem: 'Email ou senha incorretos.' })
 
         const token = jwt.sign({ id: person.id }, process.env.HASH, { expiresIn: '8h' });
 
