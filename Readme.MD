@@ -145,7 +145,6 @@ src/
  ├── database/
  ├── middlewares/
  ├── routes.js
- ├── PrismaCliente.js
  └── index.js
 ```
 
