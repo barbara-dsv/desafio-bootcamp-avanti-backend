@@ -1,4 +1,4 @@
-import prisma from '../../PrismaCliente.js';
+import prisma from '../../database/PrismaCliente.js';
 
 const deletePerson = async (req, res) => {
 
@@ -15,12 +15,12 @@ const deletePerson = async (req, res) => {
             return res.status(404).json({ mensagem: 'Pessoa não encontrada.' });
         }
 
-        if (person.id !== loggedPersonId){
-            return res.status(403).json({mensagem:'Você não têm permisão para excluir outro usuário'})
+        if (person.id !== loggedPersonId) {
+            return res.status(403).json({ mensagem: 'Você não têm permisão para excluir outro usuário' })
         }
 
         await prisma.conhecimento.deleteMany({
-            where: {pessoa_id:Number(id)}
+            where: { pessoa_id: Number(id) }
         })
 
         await prisma.pessoa.delete({
